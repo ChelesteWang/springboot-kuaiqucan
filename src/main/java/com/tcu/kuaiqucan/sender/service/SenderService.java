@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.tcu.kuaiqucan.sender.entity.Sender;
+import com.tcu.kuaiqucan.sender.entity.SenderInsert;
 
 public interface SenderService {
     public List<Sender> getAllSenders();
 
-    public void createSender(Sender sender);
+    public void createSender(SenderInsert sender);
 
     public void deleteSenderByID(Integer id);
 

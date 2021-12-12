@@ -3,6 +3,7 @@ package com.tcu.kuaiqucan.sender.controller;
 import java.util.*;
 
 import com.tcu.kuaiqucan.sender.entity.Sender;
+import com.tcu.kuaiqucan.sender.entity.SenderInsert;
 import com.tcu.kuaiqucan.sender.service.SenderServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class SenderController {
     private SenderServiceImpl service = new SenderServiceImpl();
 
     @PostMapping("/sender")
-    public ResponseEntity<String> addSender(@RequestBody Sender sender) {
+    public ResponseEntity<String> addSender(@RequestBody SenderInsert sender) {
         service.createSender(sender);
         return ResponseEntity.ok("");
     }

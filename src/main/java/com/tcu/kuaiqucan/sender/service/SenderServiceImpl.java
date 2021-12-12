@@ -3,6 +3,7 @@ package com.tcu.kuaiqucan.sender.service;
 import java.util.*;
 
 import com.tcu.kuaiqucan.sender.entity.Sender;
+import com.tcu.kuaiqucan.sender.entity.SenderInsert;
 import com.tcu.kuaiqucan.sender.repository.SenderBasicRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,11 @@ public class SenderServiceImpl implements SenderService {
     }
 
     @Override
-    public void createSender(Sender sender) {
-        repository.save(sender);
+    public void createSender(SenderInsert sender) {
+        Sender sender1 = new Sender();
+        sender1.setName(sender.getName());
+        sender1.setPhone(sender.getPhone());
+        repository.save(sender1);
     }
 
     @Override

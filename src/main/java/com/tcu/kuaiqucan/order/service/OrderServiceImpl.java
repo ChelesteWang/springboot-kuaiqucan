@@ -3,6 +3,7 @@ package com.tcu.kuaiqucan.order.service;
 import java.util.*;
 
 import com.tcu.kuaiqucan.order.entity.Order;
+import com.tcu.kuaiqucan.order.entity.OrderInsert;
 import com.tcu.kuaiqucan.order.repository.OrderBasicRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void createOrder(Order order) {
-        repository.save(order);
+    public void createOrder(OrderInsert order) {
+        Order order1 = new Order();
+        order1.setName(order.getName());
+        order1.setDescription(order.getDescription());
+        order1.setNumber(order.getNumber());
+        order1.setPrice(order.getPrice());
+        order1.setUser_id(order.getUser_id());
+        order1.setSender_id(order.getSender_id());
+        order1.setGood_id(order.getGood_id());
+        repository.save(order1);
     }
 
     @Override

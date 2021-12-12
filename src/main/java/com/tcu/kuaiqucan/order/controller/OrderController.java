@@ -3,6 +3,7 @@ package com.tcu.kuaiqucan.order.controller;
 import java.util.*;
 
 import com.tcu.kuaiqucan.order.entity.Order;
+import com.tcu.kuaiqucan.order.entity.OrderInsert;
 import com.tcu.kuaiqucan.order.service.OrderServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class OrderController {
     private OrderServiceImpl service = new OrderServiceImpl();
 
     @PostMapping("/order")
-    public ResponseEntity<String> addOrder(@RequestBody Order order) {
+    public ResponseEntity<String> addOrder(@RequestBody OrderInsert order) {
         service.createOrder(order);
         return ResponseEntity.ok("");
     }

@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.tcu.kuaiqucan.order.entity.Order;
+import com.tcu.kuaiqucan.order.entity.OrderInsert;
 
 public interface OrderService {
     public List<Order> getAllOrders();
 
-    public void createOrder(Order order);
+    public void createOrder(OrderInsert order);
 
     public void deleteOrderByID(Integer id);
 

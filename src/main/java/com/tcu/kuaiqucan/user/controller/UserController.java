@@ -3,6 +3,7 @@ package com.tcu.kuaiqucan.user.controller;
 import java.util.*;
 
 import com.tcu.kuaiqucan.user.entity.User;
+import com.tcu.kuaiqucan.user.entity.UserInsert;
 import com.tcu.kuaiqucan.user.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserController {
     private UserServiceImpl service = new UserServiceImpl();
 
     @PostMapping("/user")
-    public ResponseEntity<String> addUser(@RequestBody User user) {
+    public ResponseEntity<String> addUser(@RequestBody UserInsert user) {
         service.createUser(user);
         return ResponseEntity.ok("");
     }
