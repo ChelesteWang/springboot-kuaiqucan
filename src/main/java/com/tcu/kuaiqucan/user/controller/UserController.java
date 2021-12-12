@@ -1,10 +1,11 @@
 package com.tcu.kuaiqucan.user.controller;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import com.tcu.kuaiqucan.user.entity.User;
+import com.tcu.kuaiqucan.user.service.UserServiceImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,24 +13,38 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class UserController {
 
-    private List<User> users = new ArrayList<>();
+    @Autowired
+    private UserServiceImpl service = new UserServiceImpl();
+
+    @PostMapping("/user")
+    public ResponseEntity<String> addUser(@RequestBody User user) {
+        service.createUser(user);
+        return ResponseEntity.ok("");
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity deleteUserById(@PathVariable("id") int id) {
+        service.deleteUserByID(id);
+        return ResponseEntity.ok("");
+    }
 
     @GetMapping("/user")
-    public ResponseEntity getOrderByName(@RequestParam("name") String name) {
-        List<User> results = users.stream().filter(user -> user.getUsername().equals(name))
-                .collect(Collectors.toList());
+    public ResponseEntity getUserByName(@RequestParam("name") String name) {
+        Optional<User> results = service.retrieveUserByName(name);
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity getOrderById(@RequestParam("id") String id) {
-        List<User> results = users.stream().filter(user -> user.getId().equals(id)).collect(Collectors.toList());
+    public ResponseEntity getUserById(@RequestParam("id") Integer id) {
+        Optional<User> results = service.retrieveUserByID(id);
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/user/all")
     public ResponseEntity getAllUsers() {
-        return ResponseEntity.ok(users);
+        List<User> results = service.getAllUsers();
+        return ResponseEntity.ok(results);
     }
+
 
 }

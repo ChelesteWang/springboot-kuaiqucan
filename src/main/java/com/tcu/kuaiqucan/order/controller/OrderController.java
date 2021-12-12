@@ -1,48 +1,49 @@
 package com.tcu.kuaiqucan.order.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
-import com.tcu.kuaiqucan.order.entity.*;
+import com.tcu.kuaiqucan.order.entity.Order;
+import com.tcu.kuaiqucan.order.service.OrderServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
-@Validated
 public class OrderController {
 
-    private List<Order> orders = new ArrayList<>();
+    @Autowired
+    private OrderServiceImpl service = new OrderServiceImpl();
 
     @PostMapping("/order")
-    public ResponseEntity<List<Order>> addOrder(@RequestBody Order order) {
-        orders.add(order);
-        return ResponseEntity.ok(orders);
+    public ResponseEntity<String> addOrder(@RequestBody Order order) {
+        service.createOrder(order);
+        return ResponseEntity.ok("");
     }
 
     @DeleteMapping("/order/{id}")
     public ResponseEntity deleteOrderById(@PathVariable("id") int id) {
-        orders.remove(id);
-        return ResponseEntity.ok(orders);
+        service.deleteOrderByID(id);
+        return ResponseEntity.ok("");
     }
 
     @GetMapping("/order")
     public ResponseEntity getOrderByName(@RequestParam("name") String name) {
-        List<Order> results = orders.stream().filter(order -> order.getName().equals(name))
-                .collect(Collectors.toList());
+        Optional<Order> results = service.retrieveOrderByName(name);
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/order/{id}")
-    public ResponseEntity getOrderById(@RequestParam("id") String id) {
-        List<Order> results = orders.stream().filter(order -> order.getId().equals(id)).collect(Collectors.toList());
+    public ResponseEntity getOrderById(@RequestParam("id") Integer id) {
+        Optional<Order> results = service.retrieveOrderByID(id);
         return ResponseEntity.ok(results);
     }
 
     @GetMapping("/order/all")
-    public ResponseEntity getAllOrder() {
-        return ResponseEntity.ok(orders);
+    public ResponseEntity getAllOrders() {
+        List<Order> results = service.getAllOrders();
+        return ResponseEntity.ok(results);
     }
+
 }

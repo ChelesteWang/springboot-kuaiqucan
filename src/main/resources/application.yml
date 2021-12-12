@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.94.228.26:3306/kuaiqucan?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+message: https://github.com/yuanluoji/purestart-springboot-data-jdbc
