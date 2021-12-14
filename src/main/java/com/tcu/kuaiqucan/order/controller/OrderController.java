@@ -47,4 +47,16 @@ public class OrderController {
         return ResponseEntity.ok(results);
     }
 
+    @GetMapping("/order/user/{id}")
+    public ResponseEntity getOrderByUserId(@RequestParam("id") Integer id) {
+        List<Order> results = service.retrieveOrderByUserID(id);
+        return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/order/sender/{id}")
+    public ResponseEntity getOrderBySenderId(@RequestParam("id") Integer id) {
+        List<Order> results = service.retrieveOrderBySenderID(id);
+        return ResponseEntity.ok(results);
+    }
+
 }

@@ -18,4 +18,8 @@ public interface OrderService {
     public Optional<Order> retrieveOrderByID(Integer id);
 
     public Optional<Order> retrieveOrderByName(String name);
+
+    public List<Order> retrieveOrderByUserID(Integer userID);
+
+    public List<Order> retrieveOrderBySenderID(Integer senderID);
 }
